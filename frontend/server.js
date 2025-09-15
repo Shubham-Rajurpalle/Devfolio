@@ -8,11 +8,10 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Serve static files from the dist folder
 app.use(express.static(path.join(__dirname, "dist")));
 
-// Fallback for SPA routing
-app.get("*", (_, res) => {
+// ✅ catch-all using RegExp
+app.get(/.*/, (_, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
