@@ -1,24 +1,16 @@
 {
-  "name": "devfolio-web",
+  "name": "devfolio-backend",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev:frontend": "cd frontend && vite",
-    "dev:backend": "cd backend && node server.js",
-    "build:frontend": "cd frontend && tsc -b && vite build",
-    "build:backend": "cd backend && tsc -b",
-    "start:frontend": "cd frontend && vite preview",
-    "start:backend": "cd backend && node server.js"
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "echo 'No build needed for backend'"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^5.1.0",
     "mongoose": "^7.6.0"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^5.0.2",
-    "typescript": "^5.0.0",
-    "vite": "^7.1.5"
   }
 }
