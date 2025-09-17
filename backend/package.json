@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b frontend && vite build --config frontend/vite.config.ts",
-    "start": "node server.js"
+    "dev:frontend": "cd frontend && vite",
+    "dev:backend": "cd backend && node server.js",
+    "build:frontend": "cd frontend && tsc -b && vite build",
+    "build:backend": "cd backend && tsc -b",
+    "start:frontend": "cd frontend && vite preview",
+    "start:backend": "cd backend && node server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
