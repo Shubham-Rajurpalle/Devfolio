@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import type { DemoType } from "../lib/types";
 
 export default function DemoEmbed({
@@ -7,21 +8,15 @@ export default function DemoEmbed({
   type: DemoType;
   url?: string;
 }) {
+  useEffect(() => {
+    if (type === "appetize" && url) {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+  }, [type, url]);
+
   if (!url) return null;
 
   const common = "w-full border-0 rounded-2xl";
-
-  if (type === "appetize") {
-    return (
-      <iframe
-        src={`${url}`}
-        loading="lazy"
-        allow="autoplay; clipboard-read; clipboard-write; encrypted-media; fullscreen; picture-in-picture;"
-        style={{ width: "100%", maxWidth: 420, height: 820 }}
-        className={common}
-      />
-    );
-  }
 
   if (type === "snack") {
     return (

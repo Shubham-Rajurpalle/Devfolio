@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import Project from "./models/Project.js"; // ✅ new import
 
 dotenv.config();
 
@@ -15,31 +16,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true,
 });
 
-// ---- Models & Routes ----
-const DemoSchema = new mongoose.Schema({
-  type: {
-    type: String,
-    enum: ["appetize", "snack", "youtube", "none"],
-    required: true,
-  },
-  url: String,
-});
-
-const ProjectSchema = new mongoose.Schema({
-  title: String,
-  slug: String,
-  role: String,
-  short: String,
-  tech: [String],
-  highlights: [String],
-  cover: String,
-  demo: DemoSchema,
-  repo: String,
-  featured: Boolean,
-});
-
-const Project = mongoose.model("Project", ProjectSchema);
-
+// ---- Routes ----
 app.get("/api/projects", async (_req, res) => {
   const projects = await Project.find();
   res.json(projects);

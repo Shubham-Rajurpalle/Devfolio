@@ -24,13 +24,14 @@ export default function Home() {
         {/* Hero Section */}
         <Hero3D />
 
-        {/* Featured Projects */}
-        <section id="projects" className="mt-16">
+
+        {/* All Projects */}
+        <section id="all-projects" className="mt-16">
           <h2 className="text-3xl font-bold mb-6 text-center md:text-left">
-            Featured Projects
+            All Projects
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featured.map((p) => (
+            {projects.map((p) => (
               <ProjectCard key={p.slug} p={p} />
             ))}
           </div>

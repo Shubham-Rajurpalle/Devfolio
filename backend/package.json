@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js",
-    "build": "echo 'No build needed for backend'"
+    "build": "echo 'No build needed for backend'",
+    "seed": "node seed.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
