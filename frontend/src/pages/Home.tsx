@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { Calendar, MapPin, Award, Code, Briefcase, GraduationCap, Star, ExternalLink, Target, Trophy, Zap, Globe, User } from "lucide-react";
 import Header from "../components/Header";
 import Hero3D from "../components/Hero3D";
@@ -46,21 +47,21 @@ export default function Home() {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] }
     }
   };
 
-  const sectionVariants = {
+  const sectionVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
+      transition: { duration: 0.8, ease: [0.43, 0.13, 0.23, 0.96] }
     }
   };
 
