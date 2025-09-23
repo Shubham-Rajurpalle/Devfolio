@@ -1,4 +1,4 @@
-import { motion, type Variants, cubicBezier } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { useEffect, useState } from "react";
 import {
   MapPin,
