@@ -14,7 +14,7 @@ export default function Header() {
     { name: "Contact", href: "#contact", color: "hover:text-pink-400" },
   ];
 
-  const scrollToSection = (href) => {
+  const scrollToSection = (href: string) => {
     setOpen(false);
     const element = document.querySelector(href);
     if (element) {

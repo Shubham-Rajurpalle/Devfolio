@@ -18,6 +18,7 @@ app.use(
   cors({
     origin: [
       process.env.FRONTEND_URL || "http://localhost:5173",
+      "https://*.vercel.app",  // Allow all Vercel preview deployments
       "http://localhost:3000", // Additional origins
       "https://your-frontend-domain.com",
     ],

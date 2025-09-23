@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { Calendar, MapPin, Award, Code, Briefcase, GraduationCap, Star, ExternalLink, Target, Trophy, Zap, Globe, User } from "lucide-react";
+import { Calendar, MapPin, Award, Code, Briefcase, GraduationCap, Star, ExternalLink, Target, Trophy, Globe, User } from "lucide-react";
 import Header from "../components/Header";
 import Hero3D from "../components/Hero3D";
 import ProjectCard from "../components/ProjectCard";
@@ -297,7 +297,7 @@ export default function Home() {
             >
               {/* First row: 3 projects */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center mb-6">
-                {projects.slice(0, 3).map((project, index) => (
+                {projects.slice(0, 3).map((project) => (
                   <motion.div key={project.slug} variants={itemVariants}>
                     <ProjectCard
                       project={project}
@@ -310,7 +310,7 @@ export default function Home() {
               {/* Second row: 2 projects centered */}
               <div className="flex justify-center">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl">
-                  {projects.slice(3, 6).map((project, index) => (
+                  {projects.slice(3, 6).map((project) => (
                     <motion.div key={project.slug} variants={itemVariants}>
                       <ProjectCard
                         project={project}

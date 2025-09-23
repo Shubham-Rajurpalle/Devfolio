@@ -13,10 +13,10 @@ import { downloadResume } from "../lib/api";
 
 // Innovative 3D Scene with Glass Morphism
 function InnovativeGeometry() {
-  const groupRef = useRef();
-  const meshRef = useRef();
-  const particlesRef = useRef();
-  const orbitingElementsRef = useRef();
+  const groupRef = useRef<THREE.Group>(null);
+  const meshRef = useRef<THREE.Mesh>(null);
+  const particlesRef = useRef<THREE.Points>(null);
+  const orbitingElementsRef = useRef<THREE.Group>(null);
 
   useFrame((state) => {
     const time = state.clock.elapsedTime;
@@ -36,7 +36,7 @@ function InnovativeGeometry() {
 
     // Orbiting elements
     if (orbitingElementsRef.current) {
-      orbitingElementsRef.current.children.forEach((child, i) => {
+      orbitingElementsRef.current.children.forEach((child: THREE.Object3D, i: number) => {
         const radius = 5 + i * 1.5;
         const speed = 0.5 + i * 0.2;
         child.position.x = Math.cos(time * speed + i) * radius;
@@ -113,6 +113,7 @@ function InnovativeGeometry() {
             array={positions}
             count={particleCount}
             itemSize={3}
+            args={[positions, 3]}
           />
         </bufferGeometry>
         <pointsMaterial
@@ -150,7 +151,12 @@ function InnovativeGeometry() {
 }
 
 // Advanced typing animation with word-by-word reveal
-function AdvancedTypingAnimation({ text, className }) {
+interface TypingAnimationProps {
+  text: string;
+  className?: string;
+}
+
+function AdvancedTypingAnimation({ text, className }: TypingAnimationProps) {
   const [displayedText, setDisplayedText] = useState("");
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const words = text.split(" ");
@@ -184,25 +190,9 @@ function AdvancedTypingAnimation({ text, className }) {
 }
 
 export default function Hero3D() {
-  const [profile, setProfile] = useState(null);
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 1]);
-
-  useEffect(() => {
-    setProfile({
-      name: "Shubham Rajurpalle",
-      title: "Android & Full Stack Developer",
-      tagline: "Building Scalable Mobile & Web Solutions",
-      bio: "Specialized in Android development with Kotlin, React Native for cross-platform apps, and full-stack web development. Passionate about creating efficient, user-centric digital solutions.",
-      stats: {
-        gfgProblems: "460+",
-        youtubeSubscribers: "250K+",
-        hackathonWins: "2x Runner-Up",
-        experience: "2+ Years",
-      },
-    });
-  }, []);
 
   const supportsMotion = useMemo(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -303,7 +293,10 @@ export default function Hero3D() {
             transition={{ delay: 0.6, duration: 0.8 }}
             className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-300"
           >
-            <AdvancedTypingAnimation text="Android & Full Stack Developer" />
+            <AdvancedTypingAnimation 
+              text="Android & Full Stack Developer"
+              className="text-slate-300"
+            />
           </motion.div>
 
           {/* Tagline */}

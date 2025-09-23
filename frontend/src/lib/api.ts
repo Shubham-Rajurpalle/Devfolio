@@ -92,8 +92,11 @@ export async function submitContactForm(
     console.log("📡 Submitting contact form");
     const { data } = await api.post("/api/contact", formData);
     return data.success || false;
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("❌ Error submitting contact form:", error);
+    if (error instanceof Error) {
+      throw error;
+    }
     throw new Error("Failed to submit contact form. Please try again later.");
   }
 }
@@ -124,8 +127,8 @@ export async function checkHealth(): Promise<boolean> {
     console.log(`📡 Health check: ${api.defaults.baseURL}/api/health`);
     const { data } = await api.get("/api/health");
     return data.status === "OK";
-  } catch (error) {
-    console.warn("⚠️ Health check failed:", error.message);
+  } catch (error: unknown) {
+    console.warn("⚠️ Health check failed:", error instanceof Error ? error.message : "Unknown error");
     return false;
   }
 }
@@ -247,6 +250,10 @@ function getFallbackProjects(): Project[] {
       liveUrl: "https://shubham-devfolio.vercel.app",
       featured: true,
       duration: "Aug 2025 - Present",
+      demo: {
+        type: "appetize",
+        url: "https://shubham-devfolio.vercel.app"
+      },
     },
     {
       title: "OrderHub",
