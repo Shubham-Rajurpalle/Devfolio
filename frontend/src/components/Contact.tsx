@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { Mail, Phone, MapPin, Linkedin, Github, Send, MessageSquare, ExternalLink } from "lucide-react";
 import { getProfile } from "../lib/api";
 import type { Profile } from "../lib/types";
@@ -72,12 +73,12 @@ export default function Contact() {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] }
     }
   };
 

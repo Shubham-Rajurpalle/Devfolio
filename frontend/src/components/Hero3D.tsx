@@ -4,7 +4,6 @@ import {
   OrbitControls,
   Environment,
   Float,
-  Text3D,
   MeshTransmissionMaterial,
 } from "@react-three/drei";
 import { motion, useScroll, useTransform } from "framer-motion";

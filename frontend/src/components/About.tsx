@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, type Variants, cubicBezier } from "framer-motion";
 import { useEffect, useState } from "react";
 import {
   MapPin,
@@ -34,22 +34,22 @@ export default function About() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] },
     },
   };
 
-  const floatingVariants = {
+  const floatingVariants: Variants = {
     animate: {
       y: [0, -10, 0],
       transition: {
         duration: 3,
         repeat: Infinity,
-        ease: "easeInOut",
+        ease: [0.43, 0.13, 0.23, 0.96],
       },
     },
   };
