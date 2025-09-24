@@ -288,16 +288,29 @@ export default function Home() {
             </p>
           </motion.div>
 
-        <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="max-w-6xl mx-auto relative z-10"
-            >
-              {/* First row: 3 projects */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center mb-6">
-                {projects.slice(0, 3).map((project) => (
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="max-w-6xl mx-auto relative z-10"
+          >
+            {/* First row: 3 projects */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center mb-8">
+              {projects.slice(0, 3).map((project) => (
+                <motion.div key={project.slug} variants={itemVariants}>
+                  <ProjectCard
+                    project={project}
+                    onClick={() => handleProjectClick(project)}
+                  />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Second row: 2 projects centered */}
+            <div className="flex justify-center">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl">
+                {projects.slice(3, 6).map((project) => (
                   <motion.div key={project.slug} variants={itemVariants}>
                     <ProjectCard
                       project={project}
@@ -306,191 +319,8 @@ export default function Home() {
                   </motion.div>
                 ))}
               </div>
-              
-              {/* Second row: 2 projects centered */}
-              <div className="flex justify-center">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl">
-                  {projects.slice(3, 6).map((project) => (
-                    <motion.div key={project.slug} variants={itemVariants}>
-                      <ProjectCard
-                        project={project}
-                        onClick={() => handleProjectClick(project)}
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-        </section>
-
-        {/* Education Section */}
-        <section id="education" className="mt-32 py-20 scroll-mt-20 relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 via-transparent to-teal-500/5 rounded-3xl" />
-
-          <motion.div
-            variants={sectionVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-center mb-16 relative z-10"
-          >
-            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-emerald-400 via-teal-500 to-cyan-400 bg-clip-text text-transparent mb-6">
-              Education Journey
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto mb-6 rounded-full" />
-            <p className="text-slate-400 text-xl max-w-3xl mx-auto leading-relaxed">
-              Academic foundation and continuous learning that shaped my
-              technical expertise and problem-solving capabilities
-            </p>
+            </div>
           </motion.div>
-
-          <div className="max-w-6xl mx-auto relative z-10">
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="grid md:grid-cols-3 gap-8"
-            >
-              {/* Bachelor's Degree */}
-              <motion.div variants={itemVariants} className="group">
-                <div className="glass p-8 rounded-2xl hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-500 border border-white/10 group-hover:border-emerald-400/30 h-full">
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-emerald-500/25">
-                      <GraduationCap size={28} className="text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors duration-300">
-                        B.Tech CSE
-                      </h3>
-                      <p className="text-emerald-400 font-semibold text-lg">
-                        Computer Science & Engineering
-                      </p>
-                      <p className="text-slate-400 flex items-center gap-2 mt-2">
-                        <Calendar size={16} />
-                        2022 - 2026
-                      </p>
-                      <p className="text-slate-400 flex items-center gap-2 mt-1">
-                        <MapPin size={16} />
-                        SGGSIE&T, Nanded
-                      </p>
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    {[
-                      { label: "CGPA: 8.65/10", icon: "🎯" },
-                      {
-                        label: "Specialized in Mobile Development",
-                        icon: "📱",
-                      },
-                      { label: "Active in Hackathons", icon: "🏆" },
-                    ].map((item, index) => (
-                      <motion.div
-                        key={index}
-                        className="flex items-center gap-3 p-2 bg-white/5 rounded-lg border border-white/10"
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                      >
-                        <span className="text-lg">{item.icon}</span>
-                        <span className="text-slate-300">{item.label}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* 12th Grade */}
-              <motion.div variants={itemVariants} className="group">
-                <div className="glass p-8 rounded-2xl hover:shadow-2xl hover:shadow-teal-500/20 transition-all duration-500 border border-white/10 group-hover:border-teal-400/30 h-full">
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-teal-400 to-cyan-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-teal-500/25">
-                      <Award size={28} className="text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-teal-400 transition-colors duration-300">
-                        12th Grade
-                      </h3>
-                      <p className="text-teal-400 font-semibold text-lg">
-                        Science Stream
-                      </p>
-                      <p className="text-slate-400 flex items-center gap-2 mt-2">
-                        <Calendar size={16} />
-                        2020 - 2021
-                      </p>
-                      <p className="text-slate-400 flex items-center gap-2 mt-1">
-                        <MapPin size={16} />
-                        Vidhyadham Prashala, Pune
-                      </p>
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    {[
-                      { label: "Percentage: 84.83%", icon: "📊" },
-                      { label: "PCM Stream", icon: "🔬" },
-                      { label: "Strong Foundation", icon: "💪" },
-                    ].map((item, index) => (
-                      <motion.div
-                        key={index}
-                        className="flex items-center gap-3 p-2 bg-white/5 rounded-lg border border-white/10"
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                      >
-                        <span className="text-lg">{item.icon}</span>
-                        <span className="text-slate-300">{item.label}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* 10th Grade */}
-              <motion.div variants={itemVariants} className="group">
-                <div className="glass p-8 rounded-2xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 border border-white/10 group-hover:border-cyan-400/30 h-full">
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-cyan-500/25">
-                      <Star size={28} className="text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300">
-                        10th Grade
-                      </h3>
-                      <p className="text-cyan-400 font-semibold text-lg">
-                        Secondary School
-                      </p>
-                      <p className="text-slate-400 flex items-center gap-2 mt-2">
-                        <Calendar size={16} />
-                        2018 - 2019
-                      </p>
-                      <p className="text-slate-400 flex items-center gap-2 mt-1">
-                        <MapPin size={16} />
-                        S.S.R.B Gujar Prashala, Pune
-                      </p>
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    {[
-                      { label: "Percentage: 92%", icon: "⭐" },
-                      { label: "School Topper", icon: "🥇" },
-                      { label: "Academic Excellence", icon: "🎓" },
-                    ].map((item, index) => (
-                      <motion.div
-                        key={index}
-                        className="flex items-center gap-3 p-2 bg-white/5 rounded-lg border border-white/10"
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                      >
-                        <span className="text-lg">{item.icon}</span>
-                        <span className="text-slate-300">{item.label}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
         </section>
 
         {/* Experience Section */}
@@ -671,6 +501,176 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Education Section */}
+        <section id="education" className="mt-32 py-20 scroll-mt-20 relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 via-transparent to-teal-500/5 rounded-3xl" />
+
+          <motion.div
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-center mb-16 relative z-10"
+          >
+            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-emerald-400 via-teal-500 to-cyan-400 bg-clip-text text-transparent mb-6">
+              Education Journey
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto mb-6 rounded-full" />
+            <p className="text-slate-400 text-xl max-w-3xl mx-auto leading-relaxed">
+              Academic foundation and continuous learning that shaped my
+              technical expertise and problem-solving capabilities
+            </p>
+          </motion.div>
+
+          <div className="max-w-6xl mx-auto relative z-10">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid md:grid-cols-3 gap-8"
+            >
+              {/* Bachelor's Degree */}
+              <motion.div variants={itemVariants} className="group">
+                <div className="glass p-8 rounded-2xl hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-500 border border-white/10 group-hover:border-emerald-400/30 h-full">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-emerald-500/25">
+                      <GraduationCap size={28} className="text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors duration-300">
+                        B.Tech CSE
+                      </h3>
+                      <p className="text-emerald-400 font-semibold text-lg">
+                        Computer Science & Engineering
+                      </p>
+                      <p className="text-slate-400 flex items-center gap-2 mt-2">
+                        <Calendar size={16} />
+                        2022 - 2026
+                      </p>
+                      <p className="text-slate-400 flex items-center gap-2 mt-1">
+                        <MapPin size={16} />
+                        SGGSIE&T, Nanded
+                      </p>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    {[
+                      { label: "CGPA: 8.65/10", icon: "🎯" },
+                      {
+                        label: "Specialized in Mobile Development",
+                        icon: "📱",
+                      },
+                      { label: "Active in Hackathons", icon: "🏆" },
+                    ].map((item, index) => (
+                      <motion.div
+                        key={index}
+                        className="flex items-center gap-3 p-2 bg-white/5 rounded-lg border border-white/10"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <span className="text-lg">{item.icon}</span>
+                        <span className="text-slate-300">{item.label}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* 12th Grade */}
+              <motion.div variants={itemVariants} className="group">
+                <div className="glass p-8 rounded-2xl hover:shadow-2xl hover:shadow-teal-500/20 transition-all duration-500 border border-white/10 group-hover:border-teal-400/30 h-full">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-teal-400 to-cyan-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-teal-500/25">
+                      <Award size={28} className="text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-teal-400 transition-colors duration-300">
+                        12th Grade
+                      </h3>
+                      <p className="text-teal-400 font-semibold text-lg">
+                        Science Stream
+                      </p>
+                      <p className="text-slate-400 flex items-center gap-2 mt-2">
+                        <Calendar size={16} />
+                        2020 - 2021
+                      </p>
+                      <p className="text-slate-400 flex items-center gap-2 mt-1">
+                        <MapPin size={16} />
+                        Vidhyadham Prashala, Pune
+                      </p>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    {[
+                      { label: "Percentage: 84.83%", icon: "📊" },
+                      { label: "PCM Stream", icon: "🔬" },
+                      { label: "Strong Foundation", icon: "💪" },
+                    ].map((item, index) => (
+                      <motion.div
+                        key={index}
+                        className="flex items-center gap-3 p-2 bg-white/5 rounded-lg border border-white/10"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <span className="text-lg">{item.icon}</span>
+                        <span className="text-slate-300">{item.label}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* 10th Grade */}
+              <motion.div variants={itemVariants} className="group">
+                <div className="glass p-8 rounded-2xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 border border-white/10 group-hover:border-cyan-400/30 h-full">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-cyan-500/25">
+                      <Star size={28} className="text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300">
+                        10th Grade
+                      </h3>
+                      <p className="text-cyan-400 font-semibold text-lg">
+                        Secondary School
+                      </p>
+                      <p className="text-slate-400 flex items-center gap-2 mt-2">
+                        <Calendar size={16} />
+                        2018 - 2019
+                      </p>
+                      <p className="text-slate-400 flex items-center gap-2 mt-1">
+                        <MapPin size={16} />
+                        S.S.R.B Gujar Prashala, Pune
+                      </p>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    {[
+                      { label: "Percentage: 92%", icon: "⭐" },
+                      { label: "School Topper", icon: "🥇" },
+                      { label: "Academic Excellence", icon: "🎓" },
+                    ].map((item, index) => (
+                      <motion.div
+                        key={index}
+                        className="flex items-center gap-3 p-2 bg-white/5 rounded-lg border border-white/10"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <span className="text-lg">{item.icon}</span>
+                        <span className="text-slate-300">{item.label}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Problem Solving Skills Section */}
         <section id="skills" className="mt-32 py-20 scroll-mt-20 relative">
           <div className="absolute inset-0 bg-gradient-to-r from-green-500/5 via-transparent to-blue-500/5 rounded-3xl" />
@@ -755,7 +755,7 @@ export default function Home() {
                   <p className="text-4xl font-bold text-purple-400 mb-2">
                     Top 50
                   </p>
-                  <p className="text-slate-400">Global Ranking</p>
+                  <p className="text-slate-400">DSA Ranking</p>
                   <div className="mt-3 w-full bg-slate-700 rounded-full h-2">
                     <motion.div
                       className="h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"
@@ -959,7 +959,11 @@ export default function Home() {
                     url: "mailto:rajurpalleshubham1802@gmail.com",
                     color: "hover:text-cyan-400",
                   },
-                  { name: "YouTube", url: "#", color: "hover:text-red-400" },
+                  {
+                    name: "YouTube",
+                    url: "https://www.youtube.com/@storynetwork",
+                    color: "hover:text-red-400",
+                  },
                 ].map((link) => (
                   <motion.a
                     key={link.name}
@@ -986,7 +990,7 @@ export default function Home() {
                   whileInView={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
                 >
-                  © 2024 Shubham Rajurpalle. Built with React, TypeScript &
+                  © 2025 Shubham Rajurpalle. Built with React, TypeScript &
                   Framer Motion.
                 </motion.p>
                 <motion.div

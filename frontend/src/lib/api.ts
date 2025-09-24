@@ -109,7 +109,7 @@ export async function downloadResume(): Promise<void> {
 
     const link = document.createElement("a");
     link.href = resumeUrl;
-    link.download = "Shubham_Rajurpalle_Resume.pdf";
+    link.download = "Software_engineer_shubham_rajurpalle.pdf";
     link.target = "_blank";
     document.body.appendChild(link);
     link.click();

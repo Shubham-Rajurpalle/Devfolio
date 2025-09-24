@@ -18,9 +18,9 @@ app.use(
   cors({
     origin: [
       process.env.FRONTEND_URL || "http://localhost:5173",
-      "https://*.vercel.app",  // Allow all Vercel preview deployments
+      "https://*.vercel.app", // Allow all Vercel preview deployments
       "http://localhost:3000", // Additional origins
-      "https://your-frontend-domain.com",
+      "https://devfolio-six-omega.vercel.app", // Remove trailing slash
     ],
     credentials: true,
   })
@@ -82,8 +82,8 @@ async function initializeDefaultData() {
           phone: "+91-9834583910",
         },
         resume: {
-          url: "/static/Goldman_sachs_Software_Engineer.pdf",
-          filename: "Goldman_sachs_Software_Engineer.pdf",
+          url: "/static/Software_engineer_shubham_rajurpalle.pdf",
+          filename: "Software_engineer_shubham_rajurpalle.pdf",
           uploadedAt: new Date(),
         },
         skills: ["Android", "Kotlin", "React Native", "Firebase", "Node.js"],
@@ -120,7 +120,7 @@ async function initializeDefaultData() {
             type: "appetize",
             url: "https://appetize.io/app/b_inc3wwr2nmcjpzqivlnpkzrl64",
           },
-          repo: "https://github.com/Shubham-Rajurpalle/CricXone",
+          repo: "https://github.com/Shubham-Rajurpalle/Cric",
           featured: true,
           duration: "May 2024 - May 2025",
         },
@@ -284,10 +284,14 @@ app.get("/api/resume/download", async (req, res) => {
       });
     }
 
-    // Try different possible paths for the resume
+    // Try different possible paths for the resume on Render
     const possiblePaths = [
-      path.join(__dirname, "public", "Goldman_sachs_Software_Engineer.pdf"),
-      path.join(__dirname, "Goldman_sachs_Software_Engineer.pdf"),
+      path.join(
+        __dirname,
+        "public",
+        "Software_engineer_shubham_rajurpalle.pdf"
+      ),
+      path.join(__dirname, "Software_engineer_shubham_rajurpalle.pdf"),
       path.join(
         __dirname,
         "public",
@@ -308,34 +312,45 @@ app.get("/api/resume/download", async (req, res) => {
       }
     }
 
-    if (!resumePath) {
-      console.log("❌ Resume file not found at any expected location");
-      console.log("Checked paths:", possiblePaths);
-      return res.status(404).json({
-        error: "Resume file not found",
-        message:
-          "Please ensure Goldman_sachs_Software_Engineer.pdf is in the backend/public folder",
-        checkedPaths: possiblePaths,
+    // If file found on backend, serve it
+    if (resumePath) {
+      res.download(resumePath, profile.resume.filename, (err) => {
+        if (err) {
+          console.error("❌ Error downloading resume:", err);
+          // Fallback to frontend if backend download fails
+          const frontendResumeUrl = `${
+            process.env.FRONTEND_URL || "https://devfolio-six-omega.vercel.app"
+          }/Software_engineer_shubham_rajurpalle.pdf`;
+          console.log(
+            `🔄 Backend download failed, redirecting to: ${frontendResumeUrl}`
+          );
+          res.redirect(frontendResumeUrl);
+        } else {
+          console.log("✅ Resume downloaded successfully from backend");
+        }
       });
+      return;
     }
 
-    res.download(resumePath, profile.resume.filename, (err) => {
-      if (err) {
-        console.error("❌ Error downloading resume:", err);
-        res.status(500).json({
-          error: "Error downloading resume",
-          details: err.message,
-        });
-      } else {
-        console.log("✅ Resume downloaded successfully");
-      }
-    });
+    // If not found on backend, redirect to frontend
+    console.log("❌ Resume file not found on backend, redirecting to frontend");
+    const frontendResumeUrl = `${
+      process.env.FRONTEND_URL || "https://devfolio-six-omega.vercel.app"
+    }/Software_engineer_shubham_rajurpalle.pdf`;
+    console.log(`🔗 Redirecting to frontend: ${frontendResumeUrl}`);
+
+    res.redirect(frontendResumeUrl);
   } catch (error) {
     console.error("❌ Error fetching resume:", error);
-    res.status(500).json({
-      error: "Internal server error",
-      details: error.message,
-    });
+
+    // Final fallback - redirect to frontend
+    const frontendResumeUrl = `${
+      process.env.FRONTEND_URL || "https://devfolio-six-omega.vercel.app"
+    }/Software_engineer_shubham_rajurpalle.pdf`;
+    console.log(
+      `🔄 Server error, redirecting to frontend: ${frontendResumeUrl}`
+    );
+    res.redirect(frontendResumeUrl);
   }
 });
 
@@ -386,11 +401,22 @@ const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
   console.log(`🚀 DevFolio API server running on port ${PORT}`);
-  console.log(`📍 Health check: http://localhost:${PORT}/api/health`);
-  console.log(
-    `📄 Resume download: http://localhost:${PORT}/api/resume/download`
-  );
-  console.log(`🌐 Root endpoint: http://localhost:${PORT}/`);
+
+  // Show different URLs based on environment
+  if (process.env.NODE_ENV === "production") {
+    const renderUrl =
+      process.env.RENDER_EXTERNAL_URL || `https://your-render-app.onrender.com`;
+    console.log(`📍 Health check: ${renderUrl}/api/health`);
+    console.log(`📄 Resume download: ${renderUrl}/api/resume/download`);
+    console.log(`🌐 Root endpoint: ${renderUrl}/`);
+  } else {
+    console.log(`📍 Health check: http://localhost:${PORT}/api/health`);
+    console.log(
+      `📄 Resume download: http://localhost:${PORT}/api/resume/download`
+    );
+    console.log(`🌐 Root endpoint: http://localhost:${PORT}/`);
+  }
+
   console.log(
     `📊 MongoDB status: ${
       mongoose.connection.readyState === 1 ? "Connected" : "Disconnected"

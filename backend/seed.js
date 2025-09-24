@@ -30,8 +30,8 @@ async function seed() {
         phone: "+91-9834583910",
       },
       resume: {
-        url: "Goldman_sachs_Software_Engineer.pdf",
-        filename: "Goldman_sachs_Software_Engineer.pdf",
+        url: "Software_engineer_shubham_rajurpalle.pdf",
+        filename: "Software_engineer_shubham_rajurpalle.pdf",
         uploadedAt: new Date(),
       },
       skills: [
@@ -136,11 +136,7 @@ async function seed() {
           type: "appetize",
           url: "https://appetize.io/app/b_inc3wwr2nmcjpzqivlnpkzrl64",
         },
-        demo: {
-          type: "appetize",
-          url: "https://appetize.io/app/b_inc3wwr2nmcjpzqivlnpkzrl64",
-        },
-        repo: "https://github.com/Shubham-Rajurpalle/CricXone",
+        repo: "https://github.com/Shubham-Rajurpalle/Cric",
         featured: true,
         duration: "May 2024 - May 2025",
       },
@@ -168,10 +164,6 @@ async function seed() {
           "Built reporting flows resembling compliance monitoring pipelines",
         ],
         cover: "/campuscore.jpg",
-        demo: {
-          type: "youtube",
-          url: "https://www.youtube.com/watch?v=VIDEO_ID",
-        },
         demo: {
           type: "appetize",
           url: "https://appetize.io/app/b_mgurgbgitawf5mlnkzfjxfhxm4",
@@ -204,10 +196,6 @@ async function seed() {
         ],
         cover: "/jobit.jpg",
         demo: {
-          type: "youtube",
-          url: "https://www.youtube.com/watch?v=VIDEO_ID",
-        },
-        demo: {
           type: "appetize",
           url: "https://appetize.io/app/b_fd7aymu3xjblrsjuyzgzakjqly",
         },
@@ -239,6 +227,10 @@ async function seed() {
           "Deployed with Vercel, Render, and MongoDB Atlas, optimized for SEO and performance",
         ],
         cover: "/devfolio.jpg",
+        demo: {
+          type: "none",
+          url: "",
+        },
         repo: "https://github.com/Shubham-Rajurpalle/Devfolio",
         liveUrl: "https://shubham-devfolio.vercel.app",
         featured: true,
@@ -269,14 +261,10 @@ async function seed() {
         ],
         cover: "/orderhub.jpg",
         demo: {
-          type: "youtube",
-          url: "https://www.youtube.com/watch?v=VIDEO_ID", // replace with actual demo if available
-        },
-        demo: {
           type: "appetize",
-          url: "https://appetize.io/app/b_inc3wwr2nmcjpzqivlnpkzrl64",
+          url: "https://appetize.io/app/b_ujt5jdndblpxrj4ogqgkulmlay",
         },
-        repo: "https://github.com/Shubham-Rajurpalle/OrderHub",
+        repo: "",
         featured: true,
         duration: "Dec 2024 - Jan 2025",
       },

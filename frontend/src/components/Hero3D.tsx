@@ -329,7 +329,7 @@ export default function Hero3D() {
           >
             {[
               {
-                name: "Kotlin",
+                name: "Android",
                 icon: "🚀",
                 color: "from-purple-500 to-blue-500",
               },
@@ -509,7 +509,7 @@ export default function Hero3D() {
               },
               {
                 value: "2x",
-                label: "Runner-Up",
+                label: "Winner",
                 sublabel: "National Hackathons",
                 color: "from-yellow-400 to-orange-500",
               },
