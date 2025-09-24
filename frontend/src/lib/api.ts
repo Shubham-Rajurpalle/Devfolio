@@ -104,7 +104,7 @@ export async function submitContactForm(
 // --- Resume API ---
 export async function downloadResume(): Promise<void> {
   try {
-    const resumeUrl = `${api.defaults.baseURL}/api/resume/download`;
+    const resumeUrl = "/Software_engineer_shubham_rajurpalle.pdf"; // Direct path to public folder
     console.log(`📡 Downloading resume from: ${resumeUrl}`);
 
     const link = document.createElement("a");
@@ -116,8 +116,15 @@ export async function downloadResume(): Promise<void> {
     document.body.removeChild(link);
   } catch (error) {
     console.error("❌ Error downloading resume:", error);
-    // Fallback: Try direct link
-    window.open(`${api.defaults.baseURL}/api/resume/download`, "_blank");
+    // Fallback: Try API endpoint if direct download fails
+    try {
+      const apiResumeUrl = `${API_BASE_URL}/api/resume/download`;
+      window.open(apiResumeUrl, "_blank");
+    } catch (fallbackError) {
+      console.error("❌ Fallback download also failed:", fallbackError);
+      // Final fallback: direct public folder access
+      window.open("/Software_engineer_shubham_rajurpalle.pdf", "_blank");
+    }
   }
 }
 
